@@ -6,19 +6,39 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r package, message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+library(caret)
+library(DataExplorer)
 ```
 
 ## Assignment Overview
 
 *In this homework assignment, you will explore, analyze and model a data set containing information on crime for various neighborhoods of a major city. Each record has a response variable indicating whether or not the crime rate is above the median crime rate (1) or not (0).*
 
-
 ## Data Exploration
 
 *Describe the size and the variables in the crime training data set. Consider that too much detail will cause a manager to lose interest while too little detail will make the manager consider that you aren't doing your job.*
 
+```{r crime_training, message=FALSE, warning=FALSE}
+crime_training_data <- read.csv("https://raw.githubusercontent.com/eddiexunyc/crime_binary_logistic_regression/refs/heads/main/Resources/crime-training-data_modified.csv")
+
+glimpse(crime_training_data)
+```
+
+A simple exploratory data analysis will be conducted and the training data provided will be used to determine the property and value of the dataset.
+
+With the data set given, there are 466 rows and 13 columns with no missing or NA values. The variable chas is the only dummy variable out of 13 columns. The descriptive summary shows that 
+
+```{r data_summary, message=FALSE, warning=FALSE}
+summary(crime_training_data)
+```
+
+The DataExplorer package will be used to provide a full profile for the data frame.
+
+```{r data_explorer, warning=FALSE, message=FALSE}
+DataExplorer::create_report(crime_training_data)
+```
 ## Data Preparation
 
 *Describe how you have transformed the data by changing the original variables or creating new variables. If you did transform the data or create new variables, discuss why you did this. *
@@ -26,8 +46,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Build Models
 
 *Using the training data, build at least three different binary logistic regression models, using different variables (or the same variables with different transformations). You may select the variables manually, use an approach such as Forward or Stepwise, use a different approach, or use a combination of techniques. Describe the techniques you used. If you manually selected a variable for inclusion into the model or exclusion into the model, indicate why this was done. Be sure to explain how you can make inferences from the model, as well as discuss other relevant model output.*
-
-
 
 ## Select Model
 
