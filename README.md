@@ -4,7 +4,8 @@ Your objective is to build a binary logistic regression model on the training da
 
 - zn: proportion of residential land zoned for large lots (over 25000 square feet) (predictor variable)
 - indus: proportion of non-retail business acres per suburb (predictor variable)
-- chas: a dummy var. for whether the suburb borders the Charles River (1) or not (0) (predictor variable) • nox: nitrogen oxides concentration (parts per 10 million) (predictor variable)
+- chas: a dummy var. for whether the suburb borders the Charles River (1) or not (0) (predictor variable) 
+- nox: nitrogen oxides concentration (parts per 10 million) (predictor variable)
 - rm: average number of rooms per dwelling (predictor variable)
 - age: proportion of owner-occupied units built prior to 1940 (predictor variable)
 - dis: weighted mean of distances to five Boston employment centers (predictor variable)

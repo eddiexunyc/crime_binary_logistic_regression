@@ -10,6 +10,8 @@ output: html_document
 library(tidyverse)
 library(caret)
 library(DataExplorer)
+library(psych)
+library(car)
 ```
 
 ## Assignment Overview
@@ -21,37 +23,64 @@ library(DataExplorer)
 *Describe the size and the variables in the crime training data set. Consider that too much detail will cause a manager to lose interest while too little detail will make the manager consider that you aren't doing your job.*
 
 ```{r crime_training, message=FALSE, warning=FALSE}
+# pull in the training data set
 crime_training_data <- read.csv("https://raw.githubusercontent.com/eddiexunyc/crime_binary_logistic_regression/refs/heads/main/Resources/crime-training-data_modified.csv")
 
 glimpse(crime_training_data)
 ```
 
-A simple exploratory data analysis will be conducted and the training data provided will be used to determine the property and value of the dataset.
+### Exploratory Data Analysis
 
-With the data set given, there are 466 rows and 13 columns with no missing or NA values. The variable chas is the only dummy variable out of 13 columns. The descriptive summary shows that 
+A simple exploratory data analysis will be conducted and the training data provided will be used to determine the property and value of the dataset. The `DataExplorer` package will be used to provide a full profile for the data frame.
 
-```{r data_summary, message=FALSE, warning=FALSE}
-summary(crime_training_data)
-```
-
-The DataExplorer package will be used to provide a full profile for the data frame.
+With the data set given, there are 466 rows and 13 columns. There is no missing values or observations and all columns have continuous values. The `chas` variable is the only dummy variable out of 13 columns and is used to determine if the suburb borders the Charles River. Based on the histograms, both `rm` and `medv` variables are normally distributed. 
 
 ```{r data_explorer, warning=FALSE, message=FALSE}
-DataExplorer::create_report(crime_training_data)
+introduce(crime_training_data)
+
+# par on plots
+par(mfrow = c(1, 3))
+plot_intro(crime_training_data)
+describeBy(crime_training_data)
+plot_histogram(crime_training_data)
 ```
+
+Based on the correlation plot, it shows that `rad` and `tax` have the highest positive correlation compared to other variables.
+
+```{r}
+corPlot(crime_training_data, upper = FALSE)
+```
+
 ## Data Preparation
 
-*Describe how you have transformed the data by changing the original variables or creating new variables. If you did transform the data or create new variables, discuss why you did this. *
+*Describe how you have transformed the data by changing the original variables or creating new variables. If you did transform the data or create new variables, discuss why you did this.*
+
+To determine if the dataset is compatible with the binary regression model, the model is fitted and the VIF score analysis is conducted to check for any multicollinearity.
+
+```{r vif_check}
+vif_model_all <- lm(target ~ ., data = crime_training_data)
+
+summary(vif_model_all)
+```
+
+After the model fitting, the P-value is less than 0.05, showing that predictor variables may be significantly associated with the outcome. There are variables in the data set with moderate correlation between predictor variables. But `rad` and `tax` variables have the highest VIF scores and it is over 5, showing that they are severely correlated with other predictor variables. Therefore, they will be removed before modeling the binary regression model.
+
+```{r vif_score}
+vif_value = vif(vif_model_all)
+vif_value
+```
 
 ## Build Models
 
-*Using the training data, build at least three different binary logistic regression models, using different variables (or the same variables with different transformations). You may select the variables manually, use an approach such as Forward or Stepwise, use a different approach, or use a combination of techniques. Describe the techniques you used. If you manually selected a variable for inclusion into the model or exclusion into the model, indicate why this was done. Be sure to explain how you can make inferences from the model, as well as discuss other relevant model output.*
+*Using the training data, build at least three different binary logistic regression models, using different variables (or the same variables with different transformations). You may select the variables manually, use an approach such as Forward or Step wise, use a different approach, or use a combination of techniques. Describe the techniques you used. If you manually selected a variable for inclusion into the model or exclusion into the model, indicate why this was done. Be sure to explain how you can make inferences from the model, as well as discuss other relevant model output.*
 
 ## Select Model
 
 *Decide on the criteria for selecting the best binary logistic regression model. Will you select models with slightly worse performance if it makes more sense or is more parsimonious? Discuss why you selected your model.*
 
+## References
 
+- [Primer on binary logistic regression](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8710907/)
 
 
 
