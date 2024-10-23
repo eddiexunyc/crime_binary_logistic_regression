@@ -45,9 +45,22 @@ describeBy(crime_training_data)
 plot_histogram(crime_training_data)
 ```
 
+Given the boxplot below, the variable `chas` has few outliers.
+
+```{r box_plot, warning=FALSE, message=FALSE}
+crime_training_data %>%
+  gather(key, value, -target) %>% 
+  mutate(key = factor(key),
+         target = factor(target)) %>% 
+  ggplot(aes(x = key, y = value)) +
+  geom_boxplot(aes(fill = target)) +
+  facet_wrap(~ key, scales = 'free', ncol = 4) +
+  scale_fill_manual(values=c("lightblue", "pink")) +
+  theme_minimal()
+```
 Based on the correlation plot, it shows that `rad` and `tax` have the highest positive correlation compared to other variables.
 
-```{r}
+```{r cor_plot, warning=FALSE, message=FALSE}
 corPlot(crime_training_data, upper = FALSE)
 ```
 
@@ -57,7 +70,7 @@ corPlot(crime_training_data, upper = FALSE)
 
 To determine if the dataset is compatible with the binary regression model, the model is fitted and the VIF score analysis is conducted to check for any multicollinearity.
 
-```{r vif_check}
+```{r vif_model, warning=FALSE, message=FALSE}
 vif_model_all <- lm(target ~ ., data = crime_training_data)
 
 summary(vif_model_all)
@@ -65,7 +78,7 @@ summary(vif_model_all)
 
 After the model fitting, the P-value is less than 0.05, showing that predictor variables may be significantly associated with the outcome. There are variables in the data set with moderate correlation between predictor variables. But `rad` and `tax` variables have the highest VIF scores and it is over 5, showing that they are severely correlated with other predictor variables. Therefore, they will be removed before modeling the binary regression model.
 
-```{r vif_score}
+```{r vif_score, warning=FALSE, message=FALSE}
 vif_value = vif(vif_model_all)
 vif_value
 ```
@@ -73,6 +86,11 @@ vif_value
 ## Build Models
 
 *Using the training data, build at least three different binary logistic regression models, using different variables (or the same variables with different transformations). You may select the variables manually, use an approach such as Forward or Step wise, use a different approach, or use a combination of techniques. Describe the techniques you used. If you manually selected a variable for inclusion into the model or exclusion into the model, indicate why this was done. Be sure to explain how you can make inferences from the model, as well as discuss other relevant model output.*
+
+```{r build_model_1}
+
+```
+
 
 ## Select Model
 
