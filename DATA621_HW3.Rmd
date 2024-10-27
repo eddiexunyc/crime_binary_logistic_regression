@@ -146,6 +146,3 @@ plot(crime_binary_model_3)
 
 
 
-
-
-
