@@ -34,6 +34,9 @@ set.seed(123)
 # pull in the training data set
 crime_training_data <- read.csv("https://raw.githubusercontent.com/eddiexunyc/crime_binary_logistic_regression/refs/heads/main/Resources/crime-training-data_modified.csv")
 
+# pull in the test data
+crime_test_data <- read.csv("https://raw.githubusercontent.com/eddiexunyc/crime_binary_logistic_regression/refs/heads/main/Resources/crime-evaluation-data_modified.csv")
+
 glimpse(crime_training_data)
 ```
 
