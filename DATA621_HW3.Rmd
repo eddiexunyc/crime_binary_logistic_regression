@@ -91,8 +91,6 @@ Some of the variables are identified that are skewed, log transformation will be
 crime_training_data_transformed <- crime_training_data %>%
   mutate(log(crime_training_data$rad + 1),
          log(crime_training_data$dis + 1))
-
-skewness(crime_training_data_transformed,na.rm=FALSE)
 ```
 
 These variables `indus`, `age`, `chas`, `ptratio`, and `tax` are skewed and are considered to be removed to determine if the model will be fitted better.
@@ -108,7 +106,11 @@ crime_training_data_updated
 *Using the training data, build at least three different binary logistic regression models, using different variables (or the same variables with different transformations). You may select the variables manually, use an approach such as Forward or Step wise, use a different approach, or use a combination of techniques. Describe the techniques you used. If you manually selected a variable for inclusion into the model or exclusion into the model, indicate why this was done. Be sure to explain how you can make inferences from the model, as well as discuss other relevant model output.*
 
 ### Model 1
+
+The first model is based on the original training data set.
+
 ```{r build_model_1, warning=FALSE, message=FALSE}
+set.seed(123)
 crime_binary_model_1 <- glm(crime_training_data, family = 'binomial', formula = target ~.)
 summary(crime_binary_model_1)
 plot(crime_binary_model_1)
@@ -116,6 +118,7 @@ plot(crime_binary_model_1)
 
 ### Model 2
 ```{r build_model_2, warning=FALSE, message=FALSE}
+set.seed(123)
 crime_binary_model_2 <- glm(crime_training_data_transformed, family = 'binomial', formula = target ~.)
 summary(crime_binary_model_2)
 plot(crime_binary_model_2)
@@ -123,11 +126,11 @@ plot(crime_binary_model_2)
 
 ### Model 3
 ```{r build_model_3, warning=FALSE, message=FALSE}
+set.seed(123)
 crime_binary_model_3 <- glm(crime_training_data_updated, family = 'binomial', formula = target ~.)
 summary(crime_binary_model_3)
 plot(crime_binary_model_3)
 ```
-
 
 ## Select Model
 
@@ -136,6 +139,7 @@ plot(crime_binary_model_3)
 ## References
 
 - [Primer on binary logistic regression](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8710907/)
+- [R-Blogger: Evaluating Logistic Regression Model](https://www.r-bloggers.com/2015/08/evaluating-logistic-regression-models/#google_vignette)
 
 
 
