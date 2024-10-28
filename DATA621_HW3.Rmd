@@ -50,7 +50,7 @@ With the data set given, there are 466 rows, 13 columns and 6058 observations. T
 introduce(crime_training_data)
 
 # par on plots
-par(mfrow = c(1, 5))
+par(mfrow = c(1, 4))
 plot_intro(crime_training_data)
 describeBy(crime_training_data)
 plot_histogram(crime_training_data)
@@ -79,7 +79,7 @@ crime_box_plot
 corPlot(crime_training_data, upper = FALSE)
 ```
 
-To determine if the dataset is compatible with the binary regression model, the model is fitted and the VIF score analysis is conducted to check for any multicollinearity.
+To determine if the dataset is compatible with the binary logistic regression model, the model is fitted and the VIF score analysis is conducted to check for any multicollinearity.
 
 ```{r vif_model, warning=FALSE, message=FALSE}
 # fit a linear regression before VIF score
@@ -150,7 +150,7 @@ With data explored and prepped, 4 models will be build.
 
 ### Model 1
 
-The first model is based on the original training data set.
+The first model is based on the original training data set and will help define the baseline.
 
 ```{r build_model_1, warning=FALSE, message=FALSE}
 # build the binary logistic regression model 1
