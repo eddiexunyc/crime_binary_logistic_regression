@@ -1,7 +1,7 @@
 ---
 title: "DATA 621 - Group Assignment 3: Logistic Regression on Crime Rates"
-author: "(Group 4) Mohamed Hassan-El Serafi, Chun Shing Leung, Keith Colella, Yina,
-  Qiao, Eddie Xu"
+author: "(Group 4) Eddie Xu, Mohamed Hassan-El Serafi, Chun Shing Leung, Keith Colella, Yina,
+  Qiao"
 date: "`r Sys.Date()`"
 output: html_document
 ---
