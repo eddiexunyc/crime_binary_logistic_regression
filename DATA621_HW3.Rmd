@@ -210,15 +210,63 @@ crime_confusion_matrix_1 <- confusionMatrix(data = as.factor(crime_predicted_cla
 print(crime_confusion_matrix_1)
 ```
 
-```{r roc_curve, message=FALSE, warning=FALSE}
+```{r roc_curve_1, message=FALSE, warning=FALSE}
 roc(crime_test_data_model_1$target, crime_binary_prediction_1 , percent=TRUE, plot=TRUE, ci=TRUE, print.auc = TRUE)
 ```
 
 ### Model 2 Assessment
 
+```{r confusion_matrix_model_2, message=FALSE, warning=FALSE}
+data_split_model_2 <- createDataPartition(y = crime_training_data_transformed$target, p = 0.8, list = FALSE)
+crime_train_data_model_2 <- crime_training_data_transformed[data_split_model_2,]
+crime_test_data_model_2 <- crime_training_data_transformed[-data_split_model_2,]
+crime_binary_test_model_2 <- glm(crime_train_data_model_2, family = 'binomial', formula = target ~.)
+crime_binary_prediction_2 <- predict(crime_binary_test_model_2, crime_test_data_model_2, type = "response")
+crime_predicted_class_2 <- ifelse(crime_binary_prediction_2 > 0.5, 1, 0)
+crime_confusion_matrix_2 <- confusionMatrix(data = as.factor(crime_predicted_class_2), reference = as.factor(crime_test_data_model_2$target))
+
+print(crime_confusion_matrix_2)
+```
+
+```{r roc_curve_2, message=FALSE, warning=FALSE}
+roc(crime_test_data_model_2$target, crime_binary_prediction_2, percent=TRUE, plot=TRUE, ci=TRUE, print.auc = TRUE)
+```
+
 ### Model 3 Assessment
 
+```{r confusion_matrix_model_3, message=FALSE, warning=FALSE}
+data_split_model_3 <- createDataPartition(y = crime_training_data_tax_removed$target, p = 0.8, list = FALSE)
+crime_train_data_model_3 <- crime_training_data_tax_removed[data_split_model_3,]
+crime_test_data_model_3 <- crime_training_data_tax_removed[-data_split_model_3,]
+crime_binary_test_model_3 <- glm(crime_train_data_model_3, family = 'binomial', formula = target ~.)
+crime_binary_prediction_3 <- predict(crime_binary_test_model_3, crime_test_data_model_3, type = "response")
+crime_predicted_class_3 <- ifelse(crime_binary_prediction_3 > 0.5, 1, 0)
+crime_confusion_matrix_3 <- confusionMatrix(data = as.factor(crime_predicted_class_3), reference = as.factor(crime_test_data_model_3$target))
+
+print(crime_confusion_matrix_3)
+```
+
+```{r roc_curve_3, message=FALSE, warning=FALSE}
+roc(crime_test_data_model_3$target, crime_binary_prediction_3, percent=TRUE, plot=TRUE, ci=TRUE, print.auc = TRUE)
+```
+
 ### Model 4 Assessment
+
+```{r confusion_matrix_model_4, message=FALSE, warning=FALSE}
+data_split_model_4 <- createDataPartition(y = crime_training_data_updated$target, p = 0.8, list = FALSE)
+crime_train_data_model_4 <- crime_training_data_updated[data_split_model_4,]
+crime_test_data_model_4 <- crime_training_data_updated[-data_split_model_4,]
+crime_binary_test_model_4 <- glm(crime_train_data_model_4, family = 'binomial', formula = target ~.)
+crime_binary_prediction_4 <- predict(crime_binary_test_model_4, crime_test_data_model_4, type = "response")
+crime_predicted_class_4 <- ifelse(crime_binary_prediction_4 > 0.5, 1, 0)
+crime_confusion_matrix_4 <- confusionMatrix(data = as.factor(crime_predicted_class_4), reference = as.factor(crime_test_data_model_4$target))
+
+print(crime_confusion_matrix_4)
+```
+
+```{r roc_curve_4, message=FALSE, warning=FALSE}
+roc(crime_test_data_model_4$target, crime_binary_prediction_4, percent=TRUE, plot=TRUE, ci=TRUE, print.auc = TRUE)
+```
 
 ## References
 
