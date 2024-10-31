@@ -268,10 +268,22 @@ print(crime_confusion_matrix_4)
 roc(crime_test_data_model_4$target, crime_binary_prediction_4, percent=TRUE, plot=TRUE, ci=TRUE, print.auc = TRUE)
 ```
 
+### Best Model Prediction
+
+The best model out of all 4 models is the model with the dataset without `tax` variables. 
+
+```{r best_model, message=FALSE, warning=FALSE}
+crime_test_prediction <- predict(crime_binary_test_model_3, newdata = crime_test_data, type = "response")
+crime_prediction_class <- as.factor(ifelse(crime_binary_prediction_3 > 0.5, 1, 0))
+
+crime_prediction_class
+```
+
 ## References
 
 - [Primer on binary logistic regression](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8710907/)
 - [R-Blogger: Evaluating Logistic Regression Model](https://www.r-bloggers.com/2015/08/evaluating-logistic-regression-models/#google_vignette)
+- [Evaluating Classification Models: Understanding the Confusion Matrix and ROC Curves](https://statisticallyrelevant.com/confusion-matrix-and-roc-curves/#:~:text=The%20confusion%20matrix%20breaks%20down,apart%20at%20different%20decision%20thresholds.)
 
 
 
