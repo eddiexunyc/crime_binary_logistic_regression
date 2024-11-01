@@ -147,7 +147,7 @@ head(crime_training_data_updated)
 set.seed(123)
 ```
 
-With data explored and prepped, 4 models will be build to determine the model.
+With data explored and prepped, 4 models will be build to determine the best model.
 
 ### Model 1
 
