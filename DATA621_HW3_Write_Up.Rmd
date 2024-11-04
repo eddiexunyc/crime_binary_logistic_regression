@@ -31,9 +31,21 @@ A simple exploratory data analysis will be conducted and the training data provi
 
 With the data set given, there are 466 rows, 13 columns and 6058 observations. There is no missing values or observations and all columns have continuous values. The `chas` variable is the only dummy variable out of 13 columns and is used to determine if the suburb borders the Charles River. Based on the histograms, both `rm` and `medv` variables are normally distributed, while other variables are skewed. Both tax and rad variables have a large proportion of outliers. Specifically, 121 of the 466 total observations have the same values that appear outside the normal range of each variable. The value `666` is used for `tax` and `24` for `rad`. We suspect these values may be constant placeholders, indicating a potential data quality issue. We decided not to create new variables because there is not enough relevant information in the data set to suggest new variables might be needed.
 
+
+![Metrics](/Users/mohamedhassan/Downloads/hw3_metrics_plot.png)
+
+
+
+![Histogram](/Users/mohamedhassan/Downloads/hw3_hist_plot.png)
+
+
 Given the box plot below, the variable `chas` has few outliers and the median is close to 0. Not only that, many variables including `dis`, `age`, `lstat`, `tax` and `rad` are skewed. 
 
+![Boxplot](/Users/mohamedhassan/Downloads/hw3_boxplot.png)
+
 Based on the correlation plot, it shows that `rad` and `dis` have the highest positive correlation compared to other variables.
+
+![Correlation Plot](/Users/mohamedhassan/Downloads/hw3_corr_plot.png)
 
 To determine if the dataset is compatible with the binary logistic regression model, the model is fitted and the VIF score analysis is conducted to check for any multicollinearity.
 
@@ -60,6 +72,9 @@ The second data set is based on the log transformation on skewed variables and t
 The third data set is derived from the original dataset and the `tax` variable being removed and there was no log transformation on the skewed variables. Since the `tax` variables have a bigger impact, it will be removed and we can expect the model will be improved than the first model.
 
 The last model will be based on a dataset with rows removed due to them being outliers on `tax` and `rad` variables. Since the value `666` is used for `tax` and `24` for `rad` and with no additional relevant information, we decided to remove them to see if the variables without those outliers will perform better than the second model with the log transformation on those variables.
+
+
+
 
 # Select Model
 
