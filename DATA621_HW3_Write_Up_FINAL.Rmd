@@ -4,15 +4,15 @@ author: "(Group 4) Eddie Xu, Mohamed Hassan-El Serafi, Chun Shing Leung, Keith C
   Qiao"
 date: "`r Sys.Date()`"
 output:
-  pdf_document:
-    toc: true
-    toc_depth: '3'
   html_document:
     toc: true
     toc_depth: 3
     theme: united
     highlight: tango
     css: my.css
+  pdf_document:
+    toc: true
+    toc_depth: '3'
 ---
 
 # Introduction
@@ -29,28 +29,39 @@ A simple exploratory data analysis will be conducted and the training data provi
 
 ### Data Set
 
-With the data set given, there are 466 rows, 13 columns and 6058 observations. There is no missing values or observations and all columns have continuous values. The `chas` variable is the only dummy variable out of 13 columns and is used to determine if the suburb borders the Charles River. Based on the histograms, both `rm` and `medv` variables are normally distributed, while other variables are skewed. Both tax and rad variables have a large proportion of outliers. Specifically, 121 of the 466 total observations have the same values that appear outside the normal range of each variable. The value `666` is used for `tax` and `24` for `rad`. We suspect these values may be constant placeholders, indicating a potential data quality issue. We decided not to create new variables because there is not enough relevant information in the data set to suggest new variables might be needed.
+With the data set given, there are 466 rows, 13 columns and 6058 observations. There is no missing values or observations and all columns have continuous values. The `chas` variable is the only dummy variable out of 13 columns and is used to determine if the suburb borders the Charles River. Based on the histograms (Figure 2), both `rm` and `medv` variables are normally distributed, while other variables are skewed. Both tax and rad variables have a large proportion of outliers. Specifically, 121 of the 466 total observations have the same values that appear outside the normal range of each variable. The value `666` is used for `tax` and `24` for `rad`. We suspect these values may be constant placeholders, indicating a potential data quality issue. We decided not to create new variables because there is not enough relevant information in the data set to suggest new variables might be needed.
 
 
 ![Metrics](Resources/hw3_metrics_plot.png)
 
 
-
 ![Histogram](Resources/hw3_hist_plot.png)
 
-The box plots highlight the median of each variable when divided into subsets according to the target variable's two classes. The plot demonstrate that, for most variables, there is a clear difference in the median values across each class. This would indicate that these variables are likely to provide meaningful signal in predicting the target label.
+The box plots (Figure 3) highlight the median of each variable when divided into subsets according to the target variable's two classes. The plot demonstrate that, for most variables, there is a clear difference in the median values across each class. This would indicate that these variables are likely to provide meaningful signal in predicting the target label. 
+
 
 ![Boxplot](Resources/hw3_boxplot.png)
 
-Based on the correlation plot, it shows that `rad` and `dis` have the highest positive correlation compared to other variables.
+
+Based on the correlation plot (Figure 4), it shows that `rad` and `dis` have the highest positive correlation compared to other variables.
+
 
 ![Correlation Plot](Resources/hw3_corr_plot.png)
 
-To determine if the dataset is compatible with the binary logistic regression model, the model is fitted and the VIF score analysis is conducted to check for any multicollinearity.
 
-After the model fitting, the P-value of the F-statistic is less than 0.05, showing that predictor variables may be significantly associated with the outcome. There are variables in the data set with moderate correlation between predictor variables. Both `rad` and `tax` variables have the highest VIF scores and it is over 5, showing that they are severely correlated with other predictor variables. Therefore, either variable need to removed and need to reevaluated before modeling the binary regression model.
+To determine if the dataset is compatible with the binary logistic regression model, the model is fitted and the VIF score analysis is conducted to check for any multicollinearity. After the model fitting, the P-value of the F-statistic is less than 0.05, showing that predictor variables may be significantly associated with the outcome. There are variables in the data set with moderate correlation between predictor variables. Both `rad` and `tax` variables have the highest VIF scores (Figure 5) and it is over 5, showing that they are severely correlated with other predictor variables. Therefore, either variable need to removed and need to reevaluated before modeling the binary regression model.
 
-With either `rad` or `tax` variables removed from the data set, the updated data set is reevaluated and with the updated VIF score, both variable score dropped below 5 and it appears that `tax` variable have a bigger impact. Therefore, the data set with `tax` removed will be selected for the model building.
+
+![VIF Score](Resources/VIF_Score_HW3.png)
+
+With either `rad` or `tax` variables removed from the data set, the updated data set is reevaluated and with the updated VIF scores, both variable score dropped below 5 and it appears that `tax` variable have a bigger impact (Figure 6) than `rad` variable (Figure 5). Therefore, the data set with `tax` removed will be selected for the model building.
+
+
+![VIF Score - Rad Removed](Resources/VIF_Score2_HW3_tax.png)
+
+
+![VIF Score - Tax Removed](Resources/VIF_Score3_HW3_rad.png)
+
 
 # Data Preparation
 

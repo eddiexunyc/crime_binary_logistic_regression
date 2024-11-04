@@ -31,20 +31,9 @@ A simple exploratory data analysis will be conducted and the training data provi
 
 With the data set given, there are 466 rows, 13 columns and 6058 observations. There is no missing values or observations and all columns have continuous values. The `chas` variable is the only dummy variable out of 13 columns and is used to determine if the suburb borders the Charles River. Based on the histograms, both `rm` and `medv` variables are normally distributed, while other variables are skewed. Both tax and rad variables have a large proportion of outliers. Specifically, 121 of the 466 total observations have the same values that appear outside the normal range of each variable. The value `666` is used for `tax` and `24` for `rad`. We suspect these values may be constant placeholders, indicating a potential data quality issue. We decided not to create new variables because there is not enough relevant information in the data set to suggest new variables might be needed.
 
-
-![Metrics](Resources/hw3_metrics_plot.png)
-
-
-
-![Histogram](Resources/hw3_hist_plot.png)
-
-The box plots highlight the median of each variable when divided into subsets according to the target variable's two classes. The plot demonstrate that, for most variables, there is a clear difference in the median values across each class. This would indicate that these variables are likely to provide meaningful signal in predicting the target label.
-
-![Boxplot](Resources/hw3_boxplot.png)
+Given the box plot below, the variable `chas` has few outliers and the median is close to 0. Not only that, many variables including `dis`, `age`, `lstat`, `tax` and `rad` are skewed. 
 
 Based on the correlation plot, it shows that `rad` and `dis` have the highest positive correlation compared to other variables.
-
-![Correlation Plot](Resources/hw3_corr_plot.png)
 
 To determine if the dataset is compatible with the binary logistic regression model, the model is fitted and the VIF score analysis is conducted to check for any multicollinearity.
 
@@ -80,33 +69,11 @@ In order to select the best model, we decided to use the confusion matrix(accura
 
 For the first model, AUC score is 98.86%, the accuracy is 0.9355 and the F-1 Score is 0.9423. By comparing the first model to other models, we saw different changes in those models. 
 
-![Model 1 Confusion Matrix Statistics](Resources/HW3 CM SS Model 1.png)
-
-
-![Model 1 ROC Curve](Resources/hw3_roc_curve1.png)
-
 The second model with the log transformation have the AUC score of 98.53%, the F-1 Score of 0.9216 and the accuracy of 0.914. Compared to the first model, this is an unexpected result. All metric from the second model slightly deteriorated.
 
-
-![Model 2 Confusion Matrix Statistics](Resources/HW3 CM SS Model 2.png)
-
-
-![Model 2 ROC Curve](Resources/hw3_roc_curve2.png)
-
-The third model with `tax` variable removed slightly deteriorated compared to the first model. The AUC for that model is 98.67, the accuracy is 0.9355 and the F-1 Score is 0.9268.
-
-![Model 3 Confusion Matrix Statistics](Resources/HW3 CM SS Model 3.png)
-
-
-![Model 3 ROC Curve](Resources/hw3_roc_curve3.png)
+The model with `tax` variable removed slightly deteriorated compared to the first model. The AUC for that model is 98.67, the accuracy is 0.9355 and the F-1 Score is 0.9423.
 
 The last model with all outliers removed have the worst result from all metrics. The F-1 Score is 0.6000, the accuracy is 0.8261 an the AUC is 92.72%, making the model with the worst performance.
-
-
-![Model 4 Confusion Matrix Statistics](Resources/HW3 CM SS Model 4.png)
-
-
-![Model 4 ROC Curve](Resources/hw3_roc_curve4.png)
 
 Out of all models, we decided to select the second model with the log transformation. Both first and third models have better performance and metric results than the second model, but the data used in those models have outliers, which can impact the model's prediction and making it harder to generalize the result. This could lead to unreliable predictions.
 
@@ -273,7 +240,7 @@ crime_test_data_model_3 <- crime_training_data_tax_removed[-data_split_model_3,]
 crime_binary_test_model_3 <- glm(crime_train_data_model_3, family = 'binomial', formula = target ~.)
 crime_binary_prediction_3 <- predict(crime_binary_test_model_3, crime_test_data_model_3, type = "response")
 crime_predicted_class_3 <- ifelse(crime_binary_prediction_3 > 0.5, 1, 0)
-crime_confusion_matrix_3 <- confusionMatrix(data = as.factor(crime_predicted_class_3), reference = as.factor(crime_test_data_model_3$target), mode = "everything", positive = "1")
+crime_confusion_matrix_3 <- confusionMatrix(data = as.factor(crime_predicted_class_3), reference = as.factor(crime_test_data_model_3$target), mode = "everything")
 
 print(crime_confusion_matrix_3)
 
@@ -315,8 +282,6 @@ crime_test_data_transformed <- crime_test_data %>%
 crime_test_prediction <- predict(crime_binary_test_model_2, crime_test_data_transformed, type = "response")
 crime_prediction_class <- as.factor(ifelse(crime_test_prediction > 0.5, 1, 0))
 
-# output the prediction to csv
-write.table(crime_test_prediction, file = "crime_test_prediction.csv", sep = ",", qmethod = "double", row.names=FALSE)
-write.table(crime_prediction_class, file = "crime_prediction_class.csv", sep = ",", qmethod = "double", row.names=FALSE)
+crime_prediction_class
 ```
 
