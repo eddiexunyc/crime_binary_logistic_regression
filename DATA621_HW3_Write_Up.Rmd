@@ -38,8 +38,7 @@ With the data set given, there are 466 rows, 13 columns and 6058 observations. T
 
 ![Histogram](/Users/mohamedhassan/Downloads/hw3_hist_plot.png)
 
-
-Given the box plot below, the variable `chas` has few outliers and the median is close to 0. Not only that, many variables including `dis`, `age`, `lstat`, `tax` and `rad` are skewed. 
+The box plots highlight the median of each variable when divided into subsets according to the target variable's two classes. The plot demonstrate that, for most variables, there is a clear difference in the median values across each class. This would indicate that these variables are likely to provide meaningful signal in predicting the target label.
 
 ![Boxplot](/Users/mohamedhassan/Downloads/hw3_boxplot.png)
 
