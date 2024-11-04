@@ -83,14 +83,14 @@ In order to select the best model, we decided to use the confusion matrix(accura
 
 For the first model, AUC score is 98.86%, the accuracy is 0.9355 and the F-1 Score is 0.9423. By comparing the first model to other models, we saw different changes in those models. 
 
-![Model 1 Confusion Matrix Statistics](/Users/mohamedhassan/Documents/CM Stats Model 1.png)
+![Model 1 Confusion Matrix Statistics](/Users/mohamedhassan/Documents/HW3 CM SS Model 1.png)
 
 ![Model 1 ROC Curve](/Users/mohamedhassan/Downloads/hw3_roc_curve1.png)
 
 The second model with the log transformation have the AUC score of 98.53%, the F-1 Score of 0.9216 and the accuracy of 0.914. Compared to the first model, this is an unexpected result. All metric from the second model slightly deteriorated.
 
 
-![Model 2 Confusion Matrix Statistics](/Users/mohamedhassan/Documents/CM Stats Model 2.png)
+![Model 2 Confusion Matrix Statistics](/Users/mohamedhassan/Documents/HW3 CM SS Model 2.png)
 
 
 
@@ -98,7 +98,7 @@ The second model with the log transformation have the AUC score of 98.53%, the F
 
 The third model with `tax` variable removed slightly deteriorated compared to the first model. The AUC for that model is 98.67, the accuracy is 0.9355 and the F-1 Score is 0.9268.
 
-![Model 3 Confusion Matrix Statistics](/Users/mohamedhassan/Documents/CM Stats Model 3.png)
+![Model 3 Confusion Matrix Statistics](/Users/mohamedhassan/Documents/HW3 CM SS Model 3.png)
 
 ![Model 3 ROC Curve](/Users/mohamedhassan/Downloads/hw3_roc_curve3.png)
 
@@ -106,7 +106,7 @@ The third model with `tax` variable removed slightly deteriorated compared to th
 The last model with all outliers removed have the worst result from all metrics. The F-1 Score is 0.6000, the accuracy is 0.8261 an the AUC is 92.72%, making the model with the worst performance.
 
 
-![Model 4 Confusion Matrix Statistics](/Users/mohamedhassan/Documents/CM Stats Model 4.png)
+![Model 4 Confusion Matrix Statistics](/Users/mohamedhassan/Documents/HW3 CM SS Model 4.png)
 
 
 
